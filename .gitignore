@@ -1,0 +1,3 @@
+venv/
+app/core/settings.py
+**/__pycache__/
