@@ -1,0 +1,10 @@
+<title>Sign In</title>
+<h1>Sign In</h1>
+<form action="" method="POST">
+  {% csrf_token %} {{form}}
+  <p class="text-white">
+    You are not registered,
+    <a class="text-white" href="{% url 'registration:signup' %}">click here!</a>
+  </p>
+  <button class="btn btn-primary w-50">Enviar</button>
+</form>

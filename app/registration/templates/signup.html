@@ -1,0 +1,12 @@
+<title>Sign Up</title>
+<h1>Sign Up</h1>
+<form method="post">
+  {% csrf_token %} {{ form }}
+  <p class="text-white">
+    <a class="text-white" href="{% url 'registration:signin' %}"
+      >Go to Log In</a
+    >
+  </p>
+  <button type="submit" class="btn btn-primary w-50">Sign Up</button>
+  <br />
+</form>
