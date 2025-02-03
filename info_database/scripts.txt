@@ -1,0 +1,50 @@
+#####CREATE QUERYS
+
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    cedula INT UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE facturas (
+    id SERIAL PRIMARY KEY,
+    fecha VARCHAR(50) NOT NULL,
+    idcliente INT NOT NULL,
+    CONSTRAINT fk_facturas_clientes FOREIGN KEY (idcliente) 
+        REFERENCES clientes(id) ON DELETE CASCADE
+);
+
+CREATE TABLE productos (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(230),
+    precio INT NOT NULL,
+    stock INT NOT NULL
+);
+
+CREATE TABLE facturasproductos (
+    id SERIAL PRIMARY KEY,
+    idfactura INT NOT NULL,
+    idproducto INT NOT NULL,
+    cantidad INT NOT NULL,
+    CONSTRAINT fk_facturasproductos_facturas FOREIGN KEY (idfactura) 
+        REFERENCES facturas(id) ON DELETE CASCADE,
+    CONSTRAINT fk_facturasproductos_productos FOREIGN KEY (idproducto) 
+        REFERENCES productos(id) ON DELETE CASCADE
+);
+
+
+##### INSERT QUERIES
+
+INSERT INTO public.clientes(id, nombre, cedula, email)
+	VALUES (?, ?, ?, ?);
+
+
+
+#####TEST QUERY
+
+SELECT c.nombre, p.nombre, p.precio AS preciounidad, fp.cantidad, (p.precio * fp.cantidad) AS total
+FROM clientes c JOIN facturas f ON c.id = f.idcliente
+JOIN facturasproductos fp ON f.id = fp.idfactura
+JOIN productos p ON fp.idproducto = p.id
