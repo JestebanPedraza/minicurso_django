@@ -1,0 +1,16 @@
+<title>List Clientes</title>
+
+<h1>Lista de clientes</h1>
+
+{% for cliente in clientes %}
+
+<div>
+  <h3>{{ cliente.nombre }}</h3>
+  <p>{{ cliente.email }}</p>
+  <a href="{% url 'crud:update_client' pk=cliente.id %}">Editar cliente</a>
+  <a href="{% url 'crud:delete_client' pk=cliente.id %}">Eliminar cliente</a>
+</div>
+
+{% endfor %}
+<a href="{% url 'crud:create_client' %}">Crea un cliente</a>
+<a href="{% url 'crud:logout' %}">Log out</a>

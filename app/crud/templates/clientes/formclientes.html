@@ -1,0 +1,12 @@
+<title>Form Clientes</title>
+
+<h1>{% if object %} Update Client {% else %} Create Client {% endif %}</h1>
+
+<form method="POST">
+  {% csrf_token %} {{ form }}
+
+  <div class="">
+    <button type="submit" class="">Save</button>
+    <a href="" class="">Cancel</a>
+  </div>
+</form>
